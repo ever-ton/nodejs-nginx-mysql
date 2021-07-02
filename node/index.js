@@ -13,18 +13,12 @@ const config = {
 const mysql = require('mysql')
 const connection = mysql.createConnection(config)
 
-// const sql = `INSERT INTO people(name) values('Everton')`
-// connection.query(sql)
-// connection.end()
-
 
 app.get('/',(req,res) => {
     
-    
     insertPeople()
     getNames(res)
-    
-    // res.send(`<h1>Full Cycle Rocks!</h1>  ${resultNames}`)
+
 })
 
 
@@ -43,7 +37,6 @@ const getNames = (res) => {
             throw error
         }
 
-        // names +=  `<ol>${results.map(el => `<li>${el.name}</li>`).join('')}</ol>`
         res.send(`<h1>Full Cycle Rocks!</h1>
                         <ol>${results.map(el => `<li>${el.name}</li>`).join('')}</ol>`)
     })
