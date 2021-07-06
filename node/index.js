@@ -15,7 +15,7 @@ const connection = mysql.createConnection(config)
 
 
 app.get('/',(req,res) => {
-    
+
     insertPeople()
     getNames(res)
 
@@ -23,6 +23,8 @@ app.get('/',(req,res) => {
 
 
 function insertPeople () {
+
+    createTable()
 
     let name = faker.name.findName()
     connection.query(`INSERT INTO people(name) values('${name}')`)
@@ -40,6 +42,13 @@ const getNames = (res) => {
         res.send(`<h1>Full Cycle Rocks!</h1>
                         <ol>${results.map(el => `<li>${el.name}</li>`).join('')}</ol>`)
     })
+}
+
+const createTable = () => {
+
+    connection.query(`CREATE TABLE IF NOT EXISTS people (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        name VARCHAR(255) NOT NULL)`)
 }
 
 
